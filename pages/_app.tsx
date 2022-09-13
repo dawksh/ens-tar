@@ -12,6 +12,7 @@ import { publicProvider } from "wagmi/providers/public";
 import { extendTheme } from "@chakra-ui/react";
 import "@fontsource/inter/800.css";
 import "@fontsource/inter/400.css";
+import Script from "next/script";
 
 const theme = extendTheme({
 	initialColorMode: "dark",
@@ -41,6 +42,12 @@ const wagmiClient = createClient({
 function MyApp({ Component, pageProps }: AppProps) {
 	return (
 		<WagmiConfig client={wagmiClient}>
+			<Script
+				async
+				defer
+				data-website-id={process.env.NEXT_PUBLIC_TRACKING_ID}
+				src="https://analytics.metapasshq.xyz/umami.js"
+			></Script>
 			<RainbowKitProvider
 				chains={chains}
 				theme={midnightTheme({
