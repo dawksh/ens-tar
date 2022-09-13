@@ -4,6 +4,7 @@ import { useAccount, useEnsName } from "wagmi";
 import Tabs from "../components/Tabs";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Head from "next/head";
 
 const Home: NextPage = () => {
 	const { isConnected, address } = useAccount();
@@ -28,6 +29,9 @@ const Home: NextPage = () => {
 
 	return (
 		<Flex justify="center" alignItems="center" direction="column" gap={6}>
+			<Head>
+				<title>ENS-tar</title>
+			</Head>
 			<Heading
 				bgGradient={[
 					"linear(to-t, blue.200, teal.500)",
