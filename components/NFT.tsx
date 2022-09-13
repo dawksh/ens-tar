@@ -8,13 +8,7 @@ import {
 	Image,
 } from "@chakra-ui/react";
 import { ethers } from "ethers";
-import {
-	useAccount,
-	useEnsAddress,
-	useEnsName,
-	usePrepareContractWrite,
-	useSigner,
-} from "wagmi";
+import { useAccount, useEnsAddress, useEnsName, useSigner } from "wagmi";
 import resolverConfig from "../config.json";
 
 function NFT({ nft }: any) {

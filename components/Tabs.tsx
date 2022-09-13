@@ -7,12 +7,11 @@ import {
 	Tabs as TabContainer,
 } from "@chakra-ui/react";
 import NFTs from "./NFTs";
-import { useAccount, useEnsName } from "wagmi";
-import axios from "axios";
+import CustomAvatar from "./CustomAvatar";
 
 function Tabs({ nfts }: any) {
 	return (
-		<TabContainer variant="enclosed" colorScheme="green">
+		<TabContainer variant="enclosed" colorScheme="green" w={"60%"}>
 			<TabList>
 				<Tab>Your NFTs</Tab>
 				<Tab>Custom Avatar</Tab>
@@ -22,7 +21,7 @@ function Tabs({ nfts }: any) {
 					<NFTs nfts={nfts} />
 				</TabPanel>
 				<TabPanel>
-					<p>two!</p>
+					<CustomAvatar />
 				</TabPanel>
 			</TabPanels>
 		</TabContainer>
