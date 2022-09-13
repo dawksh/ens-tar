@@ -19,7 +19,7 @@ const Home: NextPage = () => {
 			if (isConnected && isSuccess) {
 				if (data) {
 					let { data: nftData } = await axios.get(
-						`https://eth-mainnet.alchemyapi.io/nft/v2/demo/getNFTs/?owner=${address}`
+						`https://eth-mainnet.alchemyapi.io/nft/v2/${process.env.NEXT_PUBLIC_ALCHEMY}/getNFTs/?owner=${address}`
 					);
 					setNft(nftData.ownedNfts);
 				}
