@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
 	Tab,
 	TabList,
@@ -6,8 +6,11 @@ import {
 	TabPanels,
 	Tabs as TabContainer,
 } from "@chakra-ui/react";
+import NFTs from "./NFTs";
+import { useAccount, useEnsName } from "wagmi";
+import axios from "axios";
 
-function Tabs() {
+function Tabs({ nfts }: any) {
 	return (
 		<TabContainer variant="enclosed" colorScheme="green">
 			<TabList>
@@ -16,7 +19,7 @@ function Tabs() {
 			</TabList>
 			<TabPanels>
 				<TabPanel>
-					<p>one!</p>
+					<NFTs nfts={nfts} />
 				</TabPanel>
 				<TabPanel>
 					<p>two!</p>

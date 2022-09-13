@@ -1,10 +1,31 @@
 import type { NextPage } from "next";
 import { Box, Flex, Heading } from "@chakra-ui/react";
-import { useAccount } from "wagmi";
+import { useAccount, useEnsName } from "wagmi";
 import Tabs from "../components/Tabs";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Home: NextPage = () => {
-	const { isConnected } = useAccount();
+	const { isConnected, address } = useAccount();
+	const { data, isError, isSuccess } = useEnsName({
+		address,
+	});
+
+	const [nft, setNft] = useState<any>();
+
+	useEffect(() => {
+		(async function () {
+			if (isConnected && isSuccess) {
+				if (data) {
+					let { data: nftData } = await axios.get(
+						`https://eth-mainnet.alchemyapi.io/nft/v2/demo/getNFTs/?owner=${address}`
+					);
+					setNft(nftData.ownedNfts);
+				}
+			}
+		})();
+	}, [isSuccess]);
+
 	return (
 		<Flex justify="center" alignItems="center" direction="column" gap={6}>
 			<Heading
@@ -16,7 +37,8 @@ const Home: NextPage = () => {
 			>
 				ENS-tar
 			</Heading>
-			<Tabs></Tabs>
+			{isSuccess && data && <Tabs nfts={nft} />}
+			{isError && "There was some error fetching your ENS Name"}
 		</Flex>
 	);
 };
