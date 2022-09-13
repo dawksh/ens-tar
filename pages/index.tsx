@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { Box, Flex, Heading } from "@chakra-ui/react";
+import { Alert, AlertIcon, Box, Flex, Heading } from "@chakra-ui/react";
 import { useAccount, useEnsName } from "wagmi";
 import Tabs from "../components/Tabs";
 import { useEffect, useState } from "react";
@@ -43,6 +43,22 @@ const Home: NextPage = () => {
 			</Heading>
 			{isSuccess && data && <Tabs nfts={nft} />}
 			{isError && "There was some error fetching your ENS Name"}
+			{!isSuccess && (
+				<Box border={"2px"} p={2} borderRadius="md">
+					<Alert status="info">
+						<AlertIcon />
+						No Wallet Connected :(
+					</Alert>
+				</Box>
+			)}
+			{isSuccess && !data && (
+				<Box border={"2px"} p={2} borderRadius="md">
+					<Alert status="info">
+						<AlertIcon />
+						No ENS Found :(
+					</Alert>
+				</Box>
+			)}
 		</Flex>
 	);
 };
