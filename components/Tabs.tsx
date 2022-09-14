@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
+	Spinner,
 	Tab,
 	TabList,
 	TabPanel,

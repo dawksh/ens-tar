@@ -6,6 +6,7 @@ import {
 	Text,
 	Stack,
 	Image,
+	Skeleton,
 } from "@chakra-ui/react";
 import { ethers } from "ethers";
 import { useAccount, useEnsAddress, useEnsName, useSigner } from "wagmi";

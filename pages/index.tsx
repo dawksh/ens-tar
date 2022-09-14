@@ -16,12 +16,13 @@ const Home: NextPage = () => {
 
 	useEffect(() => {
 		(async function () {
+			console.log();
 			if (isConnected && isSuccess) {
 				if (data) {
-					let { data: nftData } = await axios.get(
-						`https://eth-mainnet.alchemyapi.io/nft/v2/${process.env.NEXT_PUBLIC_ALCHEMY}/getNFTs/?owner=${address}`
-					);
-					setNft(nftData.ownedNfts);
+					let { data: nftData } = await axios.get(`/api/getNfts`, {
+						params: { address },
+					});
+					setNft(nftData.data.ownedNfts);
 				}
 			}
 		})();
@@ -41,9 +42,9 @@ const Home: NextPage = () => {
 			>
 				ENS-tar
 			</Heading>
-			{isSuccess && data && <Tabs nfts={nft} />}
+			<Tabs nfts={nft} />
 			{isError && "There was some error fetching your ENS Name"}
-			{!isSuccess && (
+			{!isConnected && (
 				<Box border={"2px"} p={2} borderRadius="md">
 					<Alert status="info">
 						<AlertIcon />
