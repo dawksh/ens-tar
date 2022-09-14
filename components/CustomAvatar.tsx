@@ -10,6 +10,7 @@ import {
 } from "wagmi";
 import ImagePlaceholder from "./ImagePlaceholder";
 import resolverConfig from "../config.json";
+import { uploadFromFile } from "../utils/ipfs";
 
 function CustomAvatar() {
 	const [image, setImage] = useState<string>();
@@ -25,10 +26,11 @@ function CustomAvatar() {
 			resolverConfig.abi,
 			signer as any
 		);
+		const ipfsURL = await uploadFromFile(image as string);
 		const nameHash = ethers.utils.namehash(data as string);
 		let txn;
 		try {
-			txn = await contract.setText(nameHash, "avatar", image);
+			txn = await contract.setText(nameHash, "avatar", ipfsURL);
 		} catch (e) {
 			console.error(e);
 		}
