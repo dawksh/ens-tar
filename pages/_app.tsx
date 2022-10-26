@@ -8,7 +8,7 @@ import {
 	midnightTheme,
 } from "@rainbow-me/rainbowkit";
 import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
-import { publicProvider } from "wagmi/providers/public";
+import { alchemyProvider } from "wagmi/providers/public";
 import { extendTheme, type ThemeConfig } from "@chakra-ui/react";
 import "@fontsource/inter/800.css";
 import "@fontsource/inter/400.css";
@@ -25,7 +25,9 @@ export const theme = extendTheme({
 
 const { chains, provider } = configureChains(
 	[chain.mainnet],
-	[publicProvider()]
+	[alchemyProvider({
+		apiKey: process.env.NEXT_PUBLIC_ALCHEMY
+	})]
 );
 
 const { connectors } = getDefaultWallets({
