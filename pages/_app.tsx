@@ -25,9 +25,11 @@ export const theme = extendTheme({
 
 const { chains, provider } = configureChains(
 	[chain.mainnet],
-	[alchemyProvider({
-		apiKey: process.env.NEXT_PUBLIC_ALCHEMY
-	})]
+	[
+		alchemyProvider({
+			apiKey: process.env.NEXT_PUBLIC_ALCHEMY,
+		}),
+	]
 );
 
 const { connectors } = getDefaultWallets({

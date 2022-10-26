@@ -12,12 +12,13 @@ const Home: NextPage = () => {
 		address,
 	});
 
+	const [_isConnected, setIsConnected] = useState<boolean>(false)
+
 	const [nft, setNft] = useState<any>();
 
 	useEffect(() => {
 		(async function () {
-			console.log();
-			if (isConnected && isSuccess) {
+			if (_isConnected && isSuccess) {
 				if (data) {
 					let { data: nftData } = await axios.get(`/api/getNfts`, {
 						params: { address },
@@ -27,6 +28,10 @@ const Home: NextPage = () => {
 			}
 		})();
 	}, [isSuccess]);
+
+	useEffect(() => {
+		setIsConnected(isConnected);
+	}, [isConnected])
 
 	return (
 		<Flex justify="center" alignItems="center" direction="column" gap={6}>
@@ -44,7 +49,7 @@ const Home: NextPage = () => {
 			</Heading>
 			<Tabs nfts={nft} />
 			{isError && "There was some error fetching your ENS Name"}
-			{!isConnected && (
+			{!_isConnected && (
 				<Box border={"2px"} p={2} borderRadius="md">
 					<Alert status="info">
 						<AlertIcon />
